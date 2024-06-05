@@ -188,6 +188,9 @@ h1 {
     z-index: 500;
 }
 
+
+
+
 @media (max-width: 800px) {
     .crop-info {
         margin-top: 10px;
