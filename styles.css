@@ -2,20 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url('background.jpg') no-repeat center center fixed;
+    background: url('background_image.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
-
 h1 {
     text-align: center;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0;
 }
-
 .slideshow-container {
     position: relative;
     max-width: 800px;
@@ -26,16 +24,12 @@ h1 {
     background-color: rgba(0, 0, 0, 0.7);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
 .slides {
     display: none;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    text-align: left;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
 }
 .slides img {
     width: 100%;
@@ -47,12 +41,6 @@ h1 {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
-
-.slides.active {
-    display: block;
-    opacity: 1;
-}
-
 .info-text {
     position: absolute;
     top: 10px;
@@ -63,29 +51,45 @@ h1 {
     padding: 5px;
     border-radius: 5px;
 }
-
 .crop-info {
     margin-top: 10px;
     color: #fff;
 }
-
 .crop-info h2 {
     margin: 0 0 10px;
 }
-
 .crop-info p {
     margin: 5px 0;
 }
-
 .icon {
-    width: 16px; /* 아이콘 크기 작게 고정 */
+    width: 16px;
     height: 16px;
     vertical-align: middle;
     margin-right: 5px;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
-
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
 .card-container {
     display: flex;
     justify-content: center;
@@ -93,7 +97,6 @@ h1 {
     margin: 20px auto;
     max-width: 1200px;
 }
-
 .card {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #ddd;
@@ -101,40 +104,35 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     margin: 10px;
     width: 300px;
+    padding: 20px;
     text-align: center;
     color: #000;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     position: relative;
 }
-
 .card img {
-    width: 80%; /* 이미지 크기 줄임 */
+    width: 100%;
     height: auto;
     border-radius: 10px;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
-
 .card .description {
     background-color: rgba(255, 255, 255, 1);
     border-top: 1px solid #ddd;
     padding: 10px;
 }
-
 .card h3 {
     margin: 10px 0;
 }
-
 .card p {
     margin: 5px 0;
 }
-
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
-
 .hover-image {
     display: none;
     position: absolute;
@@ -146,7 +144,6 @@ h1 {
     pointer-events: none;
     z-index: 1000;
 }
-
 .map-modal {
     display: none;
     position: fixed;
@@ -162,12 +159,10 @@ h1 {
     text-align: center;
     z-index: 1000;
 }
-
 .map-modal img {
     width: 100%;
     border-radius: 10px;
 }
-
 .map-modal .close {
     position: absolute;
     top: 10px;
@@ -176,7 +171,6 @@ h1 {
     font-size: 30px;
     cursor: pointer;
 }
-
 .map-overlay {
     display: none;
     position: fixed;
@@ -187,9 +181,6 @@ h1 {
     background: rgba(0, 0, 0, 0.5);
     z-index: 500;
 }
-
-
-
 
 @media (max-width: 800px) {
     .crop-info {

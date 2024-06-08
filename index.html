@@ -3,13 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스타듀밸리 도감</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <title>스타듀밸리 작물 도감</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+        .slideshow-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .slides img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 10px;
+            vertical-align: middle;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        .info-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .crop-info {
+            margin-top: 10px;
+            color: #fff;
+        }
+        .crop-info h2 {
+            margin: 0 0 10px;
+        }
+        .crop-info p {
+            margin: 5px 0;
+        }
+        .icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 5px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            color: #000;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+        .card img {
+            width: 80%; /* 이미지 크기 줄임 */
+            height: auto;
+            border-radius: 10px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        .card .description {
+            background-color: rgba(255, 255, 255, 1);
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+        .card h3 {
+            margin: 10px 0;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .hover-image {
+            display: none;
+            position: absolute;
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .map-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+        .map-modal img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .map-modal .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .map-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+
+        @media (max-width: 800px) {
+            .crop-info {
+                margin-top: 10px;
+                text-align: center;
+            }
+            .slideshow-container {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>스타듀밸리 도감</h1>
+    <h1>스타듀밸리 작물 도감</h1>
     <div class="slideshow-container">
-        <div class="slides active">
+        <div class="slides">
             <div class="info-text">*해당 이미지의 거대 작물은 3 x 3 칸의 같은 작물이 모두 완전히 자란 상태일 때 낮은 확률로 생성됩니다.*</div>
             <img src="Giant_Cauliflower.png" alt="봄 작물">
             <div class="crop-info">
@@ -19,69 +184,69 @@
                 <p><img src="seasons/Spring.png" alt="계절" class="icon"> 계절: 봄</p>
             </div>
         </div>
-        <div class="slides active">
+        <div class="slides">
             <div class="info-text">*해당 이미지의 거대 작물은 3 x 3 칸의 같은 작물이 모두 완전히 자란 상태일 때 낮은 확률로 생성됩니다.*</div>
-            <img src="Giant_Melon.png" alt="여름 작물">
+            <img src="summer_crop.jpg" alt="여름 작물">
             <div class="crop-info">
                 <h2>여름 작물</h2>
-                <p><img src="sprites/Time_Icon.png" alt="성장 시간" class="icon"> 성장 시간: 11일</p>
-                <p><img src="sprites/Gold.png" alt="가격" class="icon"> 가격: 60g</p>
-                <p><img src="seasons/Summer.png" alt="계절" class="icon"> 계절: 여름</p>
+                <p><img src="growth_icon.png" alt="성장 시간" class="icon"> 성장 시간: 11일</p>
+                <p><img src="price_icon.png" alt="가격" class="icon"> 가격: 60g</p>
+                <p><img src="season_icon.png" alt="계절" class="icon"> 계절: 여름</p>
             </div>
         </div>
-        <div class="slides active">
+        <div class="slides">
             <div class="info-text">*해당 이미지의 거대 작물은 3 x 3 칸의 같은 작물이 모두 완전히 자란 상태일 때 낮은 확률로 생성됩니다.*</div>
-            <img src="Giant_Pumpkin.png" alt="가을 작물">
+            <img src="fall_crop.jpg" alt="가을 작물">
             <div class="crop-info">
                 <h2>가을 작물</h2>
-                <p><img src="sprites/Time_Icon.png" alt="성장 시간" class="icon"> 성장 시간: 10일</p>
-                <p><img src="sprites/Gold.png" alt="가격" class="icon"> 가격: 90g</p>
-                <p><img src="seasons/Fall.png" alt="계절" class="icon"> 계절: 가을</p>
+                <p><img src="growth_icon.png" alt="성장 시간" class="icon"> 성장 시간: 10일</p>
+                <p><img src="price_icon.png" alt="가격" class="icon"> 가격: 90g</p>
+                <p><img src="season_icon.png" alt="계절" class="icon"> 계절: 가을</p>
             </div>
         </div>
-        <div class="slides active">
+        <div class="slides">
             <div class="info-text">*해당 이미지의 거대 작물은 3 x 3 칸의 같은 작물이 모두 완전히 자란 상태일 때 낮은 확률로 생성됩니다.*</div>
-            <img src="Giant_Powdermelon.png" alt="겨울 작물">
+            <img src="winter_crop.jpg" alt="겨울 작물">
             <div class="crop-info">
                 <h2>겨울 작물</h2>
-                <p><img src="sprites/Time_Icon.png" alt="성장 시간" class="icon"> 성장 시간: 14일</p>
-                <p><img src="sprites/Gold.png" alt="가격" class="icon"> 가격: 100g</p>
-                <p><img src="seasons/Winter.png" alt="계절" class="icon"> 계절: 겨울</p>
+                <p><img src="growth_icon.png" alt="성장 시간" class="icon"> 성장 시간: 14일</p>
+                <p><img src="price_icon.png" alt="가격" class="icon"> 가격: 100g</p>
+                <p><img src="season_icon.png" alt="계절" class="icon"> 계절: 겨울</p>
             </div>
         </div>
     </div>
 
     <div class="card-container">
         <div class="card" onmouseover="showHoverImage(event, 'standard_farm_map.jpg')" onmouseout="hideHoverImage()" onclick="showMap('standard_farm_map.jpg')">
-            <img src="maps/Standard_Farm_Map_Icon.png" alt="기본 농장">
+            <img src="standard_farm.jpg" alt="기본 농장">
             <div class="description">
                 <h3>기본 농장</h3>
                 <p>기본 농장 레이아웃은 넓은 개방된 공간을 제공합니다.</p>
             </div>
         </div>
         <div class="card" onmouseover="showHoverImage(event, 'riverland_farm_map.jpg')" onmouseout="hideHoverImage()" onclick="showMap('riverland_farm_map.jpg')">
-            <img src="maps/Riverland_Farm_Map_Icon.png" alt="강변 농장">
+            <img src="riverland_farm.jpg" alt="강변 농장">
             <div class="description">
                 <h3>강변 농장</h3>
                 <p>강변 농장은 많은 물과 낚시 기회를 제공합니다.</p>
             </div>
         </div>
         <div class="card" onmouseover="showHoverImage(event, 'forest_farm_map.jpg')" onmouseout="hideHoverImage()" onclick="showMap('forest_farm_map.jpg')">
-            <img src="maps/Forest_Farm_Map_Icon.png" alt="숲 농장">
+            <img src="forest_farm.jpg" alt="숲 농장">
             <div class="description">
                 <h3>숲 농장</h3>
                 <p>숲 농장은 더 많은 채집 가능 아이템과 재생 가능한 그루터기를 제공합니다.</p>
             </div>
         </div>
         <div class="card" onmouseover="showHoverImage(event, 'hilltop_farm_map.jpg')" onmouseout="hideHoverImage()" onclick="showMap('hilltop_farm_map.jpg')">
-            <img src="/maps/Hilltop_Farm_Map_Icon.png" alt="언덕 농장">
+            <img src="hilltop_farm.jpg" alt="언덕 농장">
             <div class="description">
                 <h3>언덕 농장</h3>
                 <p>언덕 농장은 작은 채석장을 제공하여 광물에 쉽게 접근할 수 있습니다.</p>
             </div>
         </div>
         <div class="card" onmouseover="showHoverImage(event, 'wilderness_farm_map.jpg')" onmouseout="hideHoverImage()" onclick="showMap('wilderness_farm_map.jpg')">
-            <img src="maps/Wilderness_Farm_Map_Icon.png" alt="황야 농장">
+            <img src="wilderness_farm.jpg" alt="황야 농장">
             <div class="description">
                 <h3>황야 농장</h3>
                 <p>황야 농장은 밤에 더 많은 몬스터가 나타납니다.</p>
@@ -97,6 +262,48 @@
 
     <img id="hover-image" class="hover-image" src="" alt="미리보기 이미지">
 
-    <script src="scripts.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.slideshow-container').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear'
+            });
+        });
+
+        function showHoverImage(event, imageUrl) {
+            const hoverImage = document.getElementById('hover-image');
+            hoverImage.src = imageUrl;
+            hoverImage.style.display = 'block';
+            document.addEventListener('mousemove', moveHoverImage);
+        }
+
+        function moveHoverImage(event) {
+            const hoverImage = document.getElementById('hover-image');
+            hoverImage.style.left = event.pageX + 15 + 'px';
+            hoverImage.style.top = event.pageY + 15 + 'px';
+        }
+
+        function hideHoverImage() {
+            const hoverImage = document.getElementById('hover-image');
+            hoverImage.style.display = 'none';
+            document.removeEventListener('mousemove', moveHoverImage);
+        }
+
+        function showMap(mapSrc) {
+            document.getElementById('farm-map').src = mapSrc;
+            document.querySelector('.map-overlay').style.display = 'block';
+            document.querySelector('.map-modal').style.display = 'block';
+        }
+
+        function closeMap() {
+            document.querySelector('.map-overlay').style.display = 'none';
+            document.querySelector('.map-modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
